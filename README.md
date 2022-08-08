@@ -1,2 +1,2 @@
 # toDoApp-MERN-
-todo app using MERN &amp; redux ( for educational purpose ) 
+todo app using MERN & redux ( for educational purpose ) 
