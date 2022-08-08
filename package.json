@@ -4,7 +4,8 @@
   "description": "todo app using MERN & redux ( for educational purpose ) ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node back/server.js",
+    "server": "nodemon back/server.js"
   },
   "repository": {
     "type": "git",
@@ -15,8 +16,5 @@
   "bugs": {
     "url": "https://github.com/ktariayman/toDoApp-MERN-/issues"
   },
-  "homepage": "https://github.com/ktariayman/toDoApp-MERN-#readme",
-  "devDependencies": {
-    "nodemon": "^2.0.19"
-  }
+  "homepage": "https://github.com/ktariayman/toDoApp-MERN-#readme"
 }
