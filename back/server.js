@@ -1,7 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
-const { errorHandler } = require("./middleware/errorMiddeware");
 const port = process.env.PORT || 5000;
+const { errorHandler } = require("./middleware/errorMiddeware");
 
 const app = express();
 app.use(express.json());
