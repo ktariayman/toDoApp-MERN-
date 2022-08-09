@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const goalSchema = mongoose.Schema(
+const todoSchema = mongoose.Schema(
   {
     text: {
       type: String,
@@ -12,4 +12,4 @@ const goalSchema = mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Todo", goalSchema);
+module.exports = mongoose.model("Todo",todoSchema);
