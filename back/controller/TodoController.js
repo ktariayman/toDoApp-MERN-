@@ -6,7 +6,7 @@ const Todo = require("../model/todoModel");
 // @access Private
 
 const getTodos = asyncHandler(async (req, res) => {
-  const todos = await Todo.find();
+  const todos = await Todo.find({ user: req.useid });
   res.status(200).json(todos);
 });
 
@@ -20,6 +20,7 @@ const setTodo = asyncHandler(async (req, res) => {
     throw new Error("Please add a text field");
   }
   const todo = await Todo.create({
+    user: req.user.id,
     text: req.body.text,
   });
   console.log(req.body);
@@ -37,6 +38,18 @@ const updateTodo = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("todo not found");
   }
+  const user = await User.findById(req.user.id);
+  // check if user exist
+
+  if (!user) {
+    res.status(401);
+    throw new Error("user not found");
+  }
+  // only the logged in user matches the todo user
+  if (todo.user.toString() !== user.id) {
+    res.status(401);
+    throw new Error("User not authorized");
+  }
   const updatedTodo = await Todo.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
   });
@@ -52,6 +65,18 @@ const deleteTodo = asyncHandler(async (req, res) => {
   if (!todo) {
     res.status(400);
     throw new Error("todo not found");
+  }
+  const user = await User.findById(req.user.id);
+  // check if user exist
+
+  if (!user) {
+    res.status(401);
+    throw new Error("user not found");
+  }
+  // only the logged in user matches the todo user
+  if (todo.user.toString() !== user.id) {
+    res.status(401);
+    throw new Error("User not authorized");
   }
   await todo.remove();
   res.status(200).json({ id: req.params.id });
