@@ -38,7 +38,6 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user.id,
       name: user.name,
       email: user.email,
-      token: generateToken(user._id),
     });
   } else {
     res.status(400);
@@ -51,8 +50,8 @@ const registerUser = asyncHandler(async (req, res) => {
 // @access Public
 
 const loginUser = asyncHandler(async (req, res) => {
-  const { email } = req.body;
-  const user = await User.find({ email });
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
       _id: user.id,
